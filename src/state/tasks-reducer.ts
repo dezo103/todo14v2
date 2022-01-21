@@ -43,6 +43,7 @@ type ActionsType = RemoveTaskActionType | AddTaskActionType
     | RemoveTodolistActionType
     | SetTodosActionType
     | SetTasksActionType
+ //   | RemoveTasksActionType
 
 const initialState: TasksStateType = {
     /*"todolistId1": [
@@ -132,7 +133,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
     }
 }
 
-export const removeTaskAC = (taskId: string, todolistId: string): RemoveTaskActionType => {
+export const removeTaskAC = (taskId: string, todolistId: string) => {
     return {type: 'REMOVE-TASK', taskId: taskId, todolistId: todolistId}
 }
 export const addTaskAC = (title: string, todolistId: string): AddTaskActionType => {
@@ -150,6 +151,7 @@ export const setTasksAC = (tasks: Array<TaskType>, todoId: string) => {
 //THUNK
 
 export type SetTasksActionType = ReturnType<typeof setTasksAC>
+export type RemoveTasksActionType = ReturnType<typeof removeTaskTC>
 
 export const setTasksTC = (todoId: string) => {
     return (dispatch: Dispatch) => {
@@ -160,4 +162,9 @@ export const setTasksTC = (todoId: string) => {
     }
 }
 
+export const removeTaskTC = (id: string, todolistId: string) => (dispatch: Dispatch) => {
+    todolistsAPI.deleteTask(todolistId, id).then(res => {
+        dispatch(removeTaskAC(id, todolistId))
+    })
+}
 
