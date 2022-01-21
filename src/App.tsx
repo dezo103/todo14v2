@@ -49,11 +49,6 @@ function App() {
         dispatch(removeTaskTC(id, todolistId));
     }, []);
 
-    // const addTask = useCallback(function (title: string, todolistId: string) {
-    //     const action = addTaskAC(title, todolistId);
-    //     dispatch(action);
-    // }, []);
-
     const addTask = useCallback(function (title: string, todolistId: string) {
         dispatch(addTaskTC(title, todolistId));
     }, []);
