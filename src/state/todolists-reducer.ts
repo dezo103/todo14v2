@@ -106,4 +106,9 @@ export const setTodosTC = () => (dispatch: Dispatch): void => {
     })
 }
 
+export const removeTodolistTC = (id: string) => (dispatch: Dispatch): void => {
+    todolistsAPI.deleteTodolist(id).then((res) => {
+        dispatch(removeTodolistAC(id))
+    })
+}
 
